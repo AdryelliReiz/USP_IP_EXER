@@ -1,10 +1,13 @@
 #include <stdio.h>
 
+//WHILE
+
 int retangulo(int a, int b) {
+    int largura = a;
     int altura = b;
 
     while(altura > 0) {
-        int largura = a;
+        largura = a;
 
         while(largura > 0) {
             printf("#");
