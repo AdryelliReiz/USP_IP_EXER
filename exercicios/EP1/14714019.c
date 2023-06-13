@@ -11,18 +11,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Adicione funções auxiliares se for necessário
+int diasdecadames[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 int verificaAnoBissexto(int ano) {
-    if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))
-        return 1;
-    else
-        return 0;
+  if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))
+    return 1;
+  else
+    return 0;
 }
 
 int verificaDataValida(int d, int m, int a) {
-  int diasdecadames[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
   if (verificaAnoBissexto(a)) diasdecadames[1] = 29;
 
   if(d < 1 ||d > diasdecadames[m - 1] || m < 1 || m > 12 || a < 1) {
@@ -33,7 +31,6 @@ int verificaDataValida(int d, int m, int a) {
 }
 
 void buscaOsDiasDeEncontro(int dia, int mes, int ano) {
-  int diasdecadames[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
   int clubes[5] = {2, 3, 4, 5, 6};  //Dias para cada clube se reunir novamente
   int diasdoanorestantes = 365;
   int i;
