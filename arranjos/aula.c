@@ -12,7 +12,7 @@ int main() {
     const double PFIBRA = 750;
     const double P_PLASTICO = 500;
 
-    double precos[] = {1500, 1100, 500};
+    double precos[] = {1500, 1100, 750, 500};
 
     
     //double* precos = (double*)malloc(sizeof(double)*4);
