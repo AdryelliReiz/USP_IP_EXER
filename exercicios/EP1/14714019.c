@@ -36,14 +36,12 @@ void buscaOsDiasDeEncontro(int dia, int mes, int ano) {
   int i;
 
   if (verificaAnoBissexto(ano))
-    diasdecadames[1] = 29;
     diasdoanorestantes = diasdoanorestantes + 1;
   
   //registra quantos dias até o termino do ano
   for (i = 0; i < mes - 1; i++) {
     diasdoanorestantes = diasdoanorestantes - diasdecadames[i];
   }
-
   diasdoanorestantes = diasdoanorestantes - dia;
 
   //percorre todos os dias do ano
@@ -55,7 +53,8 @@ void buscaOsDiasDeEncontro(int dia, int mes, int ano) {
       dia = 1;
       mes++;
     }
-        
+    
+    //verifica se os dias que já passaram são divisiveis pelos dias de encontro
     if (i % clubes[0] == 0 
         && i % clubes[1] == 0 
         && i % clubes[2] == 0 
@@ -71,22 +70,21 @@ void buscaOsDiasDeEncontro(int dia, int mes, int ano) {
 }
 
 int main() {
-    int dia, mes, ano;
+  int dia, mes, ano;
 
-    printf("Entre com a data de inicio do ano letivo:\n");
-    printf("Entre com o dia: ");
-    scanf("%d", &dia);
-    printf("Entre com o mes: ");
-    scanf("%d", &mes);
-    printf("Entre com o ano: ");
-    scanf("%d", &ano);
+  printf("Entre com a data de inicio do ano letivo:\n");
+  printf("Entre com o dia: ");
+  scanf("%d", &dia);
+  printf("Entre com o mes: ");
+  scanf("%d", &mes);
+  printf("Entre com o ano: ");
+  scanf("%d", &ano);
 
-    if(!verificaDataValida(dia, mes, ano)) {
-      printf("Dados incorretos\n");
-      exit(1); // Esta função aborta a execução do programa.
-    }
-    
-  // Adicione seu código
+  if(!verificaDataValida(dia, mes, ano)) {
+    printf("Dados incorretos\n");
+    exit(1); // Esta função aborta a execução do programa.
+  }
+  
   printf("Data de inicio do ano letivo: %d/%d/%d\n", dia, mes, ano);
   printf("Proximos dias de encontro de todos os clubes:\n");
   buscaOsDiasDeEncontro(dia, mes, ano);
