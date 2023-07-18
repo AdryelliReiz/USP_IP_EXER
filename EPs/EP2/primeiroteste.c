@@ -18,7 +18,7 @@
 //#define NumeroMaxTimes 20
 //#define NumeroMaxRodadas 38
 #define NumeroMaxTimes 6
-#define NumeroMaxRodadas 6
+#define NumeroMaxRodadas 9
 
 
 typedef struct auxtime {
@@ -142,12 +142,16 @@ void imprimeclassificacao(time * timescampeonato,int notimes){
   time aux;
   //Ordena os times por classificação
   for (ult = notimes - 1; ult > 0; ult--) {
-    printf("Faltam %i interações\n", ult);
     for (i = 0; i < ult; i++) {
       aux = timescampeonato[i];
       if(aux.PontosGanhos < timescampeonato[i+1].PontosGanhos) {
         timescampeonato[i] = timescampeonato[i + 1];
         timescampeonato[i + 1] = aux;
+      } else if (aux.PontosGanhos == timescampeonato[i+1].PontosGanhos) {
+        if(aux.SaldoDeGols < timescampeonato[i+1].SaldoDeGols) {
+          timescampeonato[i] = timescampeonato[i + 1];
+          timescampeonato[i + 1] = aux;
+        }
       }
     }
   }
@@ -155,9 +159,9 @@ void imprimeclassificacao(time * timescampeonato,int notimes){
   //printa os resultados da classificação
   printf("|| Nome: ||  Classificação:  ||  Pontuação: ||\n");
   for (i2 = 0; i2 < notimes; i2++) {
-    printf("||  %s  ", timescampeonato[i2].nome);
+    printf("%s  ", timescampeonato[i2].nome);
     printf("||  %d  ", i2 + 1);
-    printf("||  %d  ||\n", timescampeonato[i2].PontosGanhos);
+    printf("||  %d\n", timescampeonato[i2].PontosGanhos);
   }
 }
 
