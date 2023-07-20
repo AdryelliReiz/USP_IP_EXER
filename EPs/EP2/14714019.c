@@ -1,6 +1,6 @@
 /*********************************************************************/
 /**   ACH2001 - Introducao a Programação                            **/
-/**   EACH-USP - Primeiro Semestre de 2022                          **/
+/**   EACH-USP - Primeiro Semestre de 2023                          **/
 /**   Turma 02 - Prof. Marcos Lordello Chaim                        **/
 /**                                                                 **/
 /**   Segundo Exercicio-Programa                                    **/
@@ -158,11 +158,19 @@ void imprimeclassificacao(time * timescampeonato,int notimes){
             if(aux.PontosGanhos < timescampeonato[i+1].PontosGanhos) {
                 timescampeonato[i] = timescampeonato[i + 1];
                 timescampeonato[i + 1] = aux;
-            } else if (aux.PontosGanhos == timescampeonato[i+1].PontosGanhos) {
+            }
+            else if (aux.PontosGanhos == timescampeonato[i+1].PontosGanhos) {
                 //ordena por saldo de gols
                 if(aux.SaldoDeGols < timescampeonato[i+1].SaldoDeGols) {
                     timescampeonato[i] = timescampeonato[i + 1];
                     timescampeonato[i + 1] = aux;
+                }
+                else if (aux.SaldoDeGols == timescampeonato[i+1].SaldoDeGols) {
+                    //ordena por maior numero de vitorias
+                    if(aux.Vitorias < timescampeonato[i+1].Vitorias) {
+                        timescampeonato[i] = timescampeonato[i + 1];
+                        timescampeonato[i + 1] = aux;
+                    }
                 }
             }
         }
@@ -186,15 +194,15 @@ void imprimeclassificacao(time * timescampeonato,int notimes){
 
 // Salva os dados da classificação dos tipos em arquivo no disco
 void salvaclassificacao(time * timescampeonato,int notimes, char * arquivo){
-    //Abrir arquivo para escrita
+    //abrir arquivo para escrita
     FILE *arquivoC = fopen(arquivo, "w");
     if (arquivoC == NULL) {
         printf("Erro ao abrir o arquivo.");
     } else {
-        // Escrever cabeçalho no arquivo
+        // escrever cabeçalho no arquivo
         fprintf(arquivoC, "%-15s%-30s%-8s%-9s%-8s%-9s%-14s%-11s\n", "Classificacao", "Nome", "Pontos", "Vitorias", "Empates", "Derrotas", "Saldo de Gols", "Gol Average");
 
-        // Escrever informações dos times no arquivo
+        // escrever informações dos times no arquivo
         for (int i = 0; i < notimes; i++) {
             fprintf(arquivoC, "%-15d%-30s%-8d%-9d%-8d%-9d%-14d%-9.3f\n",
                 i + 1, timescampeonato[i].nome, timescampeonato[i].PontosGanhos,
@@ -202,7 +210,7 @@ void salvaclassificacao(time * timescampeonato,int notimes, char * arquivo){
                 timescampeonato[i].SaldoDeGols, timescampeonato[i].GolAverage);
         }
 
-        // Fechar o arquivo
+        // fechar o arquivo
         fclose(arquivoC);
     }
 }
